@@ -1,2 +1,53 @@
 @import "variable_override";
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "stage";
+
+.social {
+  position: fixed;
+  left: -100px;
+  .social-row {
+    width: 150px;
+    display: flex;
+    justify-content: space-around;
+    border-radius: 0 20px 20px 0;
+    margin-bottom: 3px;
+    padding: 10px 5px;
+    p {
+      margin: 0;
+      margin-right: 10px;
+    }
+    .social-logo {
+      background-color: white;
+      border-radius: 50%;
+      padding: 2px;
+    }
+  }
+  .twitter {
+    background-color: rgb(7, 175, 218);
+    transition: 300ms;
+    &:hover {
+      transform: translate(100px, 0);
+    }
+  }
+  .facebook {
+    background-color: rgb(0, 0, 255);
+    transition: 300ms;
+    &:hover {
+      transform: translate(100px, 0);
+    }
+  }
+  .linkedin {
+    background-color: rgb(248, 32, 219);
+    transition: 300ms;
+    &:hover {
+      transform: translate(100px, 0);
+    }
+  }
+  .google-plus {
+    background-color: rgb(243, 31, 3);
+    transition: 300ms;
+    &:hover {
+      transform: translate(100px, 0);
+    }
+  }
+}
