@@ -226,7 +226,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   function featureMovie(page, max, filter) {
     for (let i = 1; i <= page; i++) {
       fetch(
-        `http://api.themoviedb.org/3/discover/movie?api_key=064a095d09fe3dff6f8350dae42af935&sort_by=popularity.desc&with_genres=${filter}&page=${i}`
+        `https://api.themoviedb.org/3/discover/movie?api_key=064a095d09fe3dff6f8350dae42af935&sort_by=popularity.desc&with_genres=${filter}&page=${i}`
       )
         .then((res) => res.json())
         .then((data) => {
