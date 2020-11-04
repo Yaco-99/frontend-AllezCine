@@ -10827,10 +10827,7 @@ svg {
   margin-right: 5px;
   padding: 7px 5px;
   width: 90px;
-}
-
-.navigation-buttons:active {
-  background-color: red;
+  color: white;
 }
 
 .navbar-element {
@@ -10838,6 +10835,7 @@ svg {
 }
 
 header {
+  width: 100%;
   height: 10vh;
   position: absolute;
   z-index: 10;
@@ -10916,6 +10914,14 @@ a {
 
 body {
   font-size: 14px;
+}
+
+.buttonRed {
+  border: none;
+}
+
+.buttonRed:focus {
+  background-color: red;
 }
 
 .social {

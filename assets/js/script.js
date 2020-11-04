@@ -5,10 +5,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     img_url = "https://image.tmdb.org/t/p/w500",
     overlay = document.getElementById("overlay"),
     closeModalButton = document.getElementById("close-modal-button"),
-    moreButton = document.getElementById("moreButton");
+    moreButton = document.getElementById("moreButton"),
+    genreButtons = document.querySelectorAll(".genreButton");
 
   let latestMovies = latestMovieFetch(),
-    cardMovies = cardMoviesFetch();
+    cardMovies = cardMoviesFetch(),
+    chosenFiltre = "",
+    page = 1,
+    max = 20;
 
   overlay.addEventListener("click", () => {
     const modal = document.querySelector(".trailerModal.active");
@@ -19,8 +23,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     closeModal(modal);
   });
 
+  genreButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      document.getElementById("featuredMoviesTarget").innerHTML = ``;
+      chosenFiltre = button.id;
+      featureMovie(page, max, chosenFiltre);
+    });
+  });
+
   document.getElementById("moreButton").addEventListener("click", () => {
-    let page, max;
     document.getElementById("featuredMoviesTarget").innerHTML = ``;
     if (moreButton.innerHTML == "PLUS DE FILMS") {
       moreButton.innerHTML = "MOINS";
@@ -31,7 +42,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       page = 1;
       max = 20;
     }
-    featureMovie(page, max);
+    featureMovie(page, max, chosenFiltre);
   });
 
   function closeModal(modal) {
@@ -67,7 +78,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function movieCard(data, max, target) {
-    let movieGenre;
+    let count = 0,
+      movieGenre;
     for (let i = 0; i < max; i++) {
       genres.map((el) =>
         el.id == data[i].genre_ids[0] ? (movieGenre = el.name) : "no"
@@ -89,6 +101,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         trailer(data[i]);
       });
     }
+    console.log("count : " + count + " temp " + temp);
+    count >= temp - 1 ? "ok" : featureMovie(page++, max, chosenFiltre);
   }
 
   function trailer(movieData) {
@@ -169,11 +183,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     return latestMovies;
   }
 
-  featureMovie(1, 20);
-  function featureMovie(page, max) {
+  featureMovie(1, max, chosenFiltre);
+  function featureMovie(page, max, filter) {
     for (let i = 1; i <= page; i++) {
       fetch(
-        `https://api.themoviedb.org/3/movie/popular?api_key=064a095d09fe3dff6f8350dae42af935&page=${i}`
+        `http://api.themoviedb.org/3/discover/movie?api_key=064a095d09fe3dff6f8350dae42af935&sort_by=popularity.desc&with_genres=${filter}&page=${i}`
       )
         .then((res) => res.json())
         .then((data) => {
