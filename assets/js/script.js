@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     genreButtons = document.querySelectorAll(".genreButton");
 
   let latestMovies = latestMovieFetch(),
-    cardMovies = cardMoviesFetch(),
+    cardMovies = cardMoviesFetch(5, "movieCardTarget"),
     chosenFiltre = "",
     page = 1,
     max = 20;
@@ -101,8 +101,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         trailer(data[i]);
       });
     }
-    console.log("count : " + count + " temp " + temp);
-    count >= temp - 1 ? "ok" : featureMovie(page++, max, chosenFiltre);
   }
 
   function trailer(movieData) {
@@ -166,13 +164,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     return latestMovies;
   }
 
-  async function cardMoviesFetch() {
+  cardMoviesFetch(8, "shop");
+
+  async function cardMoviesFetch(max, target) {
     const promiseCard = new Promise((succes) => {
       fetch(url)
         .then((res) => res.json())
         .then((data) => {
           const movies = data.results;
-          movieCard(movies, 5, "movieCardTarget");
+          movieCard(movies, max, target);
           succes("over");
         })
         .catch((error) => {
