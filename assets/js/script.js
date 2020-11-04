@@ -12,7 +12,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     cardMovies = cardMoviesFetch(5, "movieCardTarget"),
     chosenFiltre = "",
     page = 1,
-    max = 20;
+    max = 20,
+    shopArray = [],
+    shopIndex = 0;
 
   overlay.addEventListener("click", () => {
     const modal = document.querySelector(".trailerModal.active");
@@ -78,9 +80,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function movieCard(data, max, target) {
-    let count = 0,
-      movieGenre;
+    let movieGenre;
     for (let i = 0; i < max; i++) {
+      target == "shop" ? shopArray.push(data[i]) : "no";
       genres.map((el) =>
         el.id == data[i].genre_ids[0] ? (movieGenre = el.name) : "no"
       );
@@ -101,6 +103,43 @@ document.addEventListener("DOMContentLoaded", async () => {
         trailer(data[i]);
       });
     }
+
+    displayShop(shopArray, shopIndex);
+
+    document.getElementById("shopPrevious").addEventListener("click", (e) => {
+      shopIndex--;
+      shopIndex == -1 ? (shopIndex = 7) : "ok";
+      displayShop(shopArray, shopIndex);
+      e.stopPropagation();
+      e.preventDefault();
+    });
+
+    document.getElementById("shopNext").addEventListener("click", (e) => {
+      shopIndex++;
+      shopIndex == 8 ? (shopIndex = 0) : "ok";
+      displayShop(shopArray, shopIndex);
+      e.stopPropagation();
+      e.preventDefault();
+    });
+  }
+
+  function displayShop(arr, index) {
+    console.log(index);
+    let genreArr = [];
+    genres.map((el) => {
+      arr[index].genre_ids.map((ids) => {
+        el.id == ids ? genreArr.push(el.name) : "no";
+      });
+    });
+    document.getElementById(
+      "shopImg"
+    ).src = `${img_url}${arr[index].poster_path}`;
+    document.getElementById("ShopMovieTitle").innerHTML =
+      arr[index].original_title;
+    document.getElementById("shopStoryLine").innerHTML = arr[index].overview;
+    document.getElementById("shopDate").innerHTML = arr[index].release_date;
+    document.getElementById("shopGenre").innerHTML = genreArr.join(" | ");
+    document.getElementById("shopPrice").innerHTML = "18";
   }
 
   function trailer(movieData) {
@@ -118,7 +157,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function showTrailer(id, info) {
-    console.log(info);
     const link = `youtube.com/embed/${id}`;
     document.getElementById("modal").classList.add("active");
     document.getElementById("overlay").classList.add("active");
