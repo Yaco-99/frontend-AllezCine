@@ -10839,18 +10839,16 @@ svg {
 
 header {
   height: 10vh;
+  position: absolute;
+  z-index: 10;
+}
+
+.carouselFilmProposition {
+  width: 100vw;
 }
 
 a {
   color: white;
-}
-
-.carouselFilmProposition {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  z-index: -1;
 }
 
 .carousel-item {
@@ -10881,7 +10879,6 @@ a {
 }
 
 .second-section {
-  margin-top: 50vh;
   background-color: red;
   width: 100%;
 }
@@ -10891,9 +10888,22 @@ a {
   color: white;
 }
 
+.card-img-top {
+  height: 15rem;
+}
+
+.card-body {
+  padding: 10px 5px;
+}
+
+body {
+  font-size: 14px;
+}
+
 .social {
   position: fixed;
   left: -100px;
+  top: 60%;
 }
 
 .social .social-row {

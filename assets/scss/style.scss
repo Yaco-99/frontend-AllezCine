@@ -1,10 +1,16 @@
 @import "variable_override";
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 @import "stage";
+@import "moviesCards";
+
+body {
+  font-size: 14px;
+}
 
 .social {
   position: fixed;
   left: -100px;
+  top: 60%;
   .social-row {
     width: 150px;
     display: flex;

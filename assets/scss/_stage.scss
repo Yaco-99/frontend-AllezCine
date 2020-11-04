@@ -28,18 +28,16 @@ svg {
 }
 header {
   height: 10vh;
+  position: absolute;
+  z-index: 10;
 }
-
+.carouselFilmProposition {
+  width: 100vw;
+}
 a {
   color: white;
 }
-.carouselFilmProposition {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  z-index: -1;
-}
+
 .carousel-item {
   pointer-events: all;
   img {
@@ -60,7 +58,6 @@ a {
 }
 
 .second-section {
-  margin-top: 50vh;
   background-color: red;
   width: 100%;
 }
