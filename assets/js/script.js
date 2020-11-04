@@ -184,6 +184,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   featureMovie(1, max, chosenFiltre);
+
   function featureMovie(page, max, filter) {
     for (let i = 1; i <= page; i++) {
       fetch(
