@@ -10852,12 +10852,14 @@ a {
 }
 
 .carousel-item {
-  pointer-events: all;
+  height: 60vh;
 }
 
 .carousel-item img {
-  height: 60vh;
-  width: 100vw;
+  -o-object-fit: cover;
+     object-fit: cover;
+  position: relative;
+  top: -10rem;
 }
 
 .stage-button {
@@ -10971,5 +10973,44 @@ body {
 .social .google-plus:hover {
   -webkit-transform: translate(100px, 0);
           transform: translate(100px, 0);
+}
+
+.trailerModal {
+  top: 50%;
+  left: 50%;
+  position: fixed;
+  -webkit-transform: translate(-50%, -50%) scale(0);
+          transform: translate(-50%, -50%) scale(0);
+  -webkit-transition: 200ms ease-in-out;
+  transition: 200ms ease-in-out;
+  z-index: 11;
+  background: white;
+  text-align: center;
+  padding: 1em;
+  border-radius: 20px;
+}
+
+.trailerModal.active {
+  -webkit-transform: translate(-50%, -50%) scale(1);
+          transform: translate(-50%, -50%) scale(1);
+}
+
+#overlay {
+  position: fixed;
+  opacity: 0;
+  -webkit-transition: ease-in-out;
+  transition: ease-in-out;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+
+#overlay.active {
+  z-index: 10;
+  opacity: 1;
+  pointer-events: all;
 }
 /*# sourceMappingURL=style.css.map */

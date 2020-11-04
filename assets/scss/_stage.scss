@@ -39,10 +39,11 @@ a {
 }
 
 .carousel-item {
-  pointer-events: all;
+  height: 60vh;
   img {
-    height: 60vh;
-    width: 100vw;
+    object-fit: cover;
+    position: relative;
+    top: -10rem;
   }
 }
 .stage-button {
