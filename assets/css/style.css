@@ -10898,6 +10898,22 @@ a {
   padding: 10px 5px;
 }
 
+.genreButton {
+  background-color: #d6d6d6;
+  padding: 5px 0;
+  width: 80px;
+  border: none;
+}
+
+.more {
+  background-color: red;
+  color: white;
+  padding: 5px;
+  display: block;
+  margin: 10px auto;
+  border: none;
+}
+
 body {
   font-size: 14px;
 }
@@ -10977,15 +10993,14 @@ body {
 
 .trailerModal {
   top: 50%;
-  left: 50%;
-  position: fixed;
+  left: 25%;
+  position: absolute;
   -webkit-transform: translate(-50%, -50%) scale(0);
           transform: translate(-50%, -50%) scale(0);
   -webkit-transition: 200ms ease-in-out;
   transition: 200ms ease-in-out;
-  z-index: 11;
+  z-index: 16;
   background: white;
-  text-align: center;
   padding: 1em;
   border-radius: 20px;
 }
@@ -11012,5 +11027,10 @@ body {
   z-index: 10;
   opacity: 1;
   pointer-events: all;
+}
+
+.secondary-title {
+  border-left: solid 4px red;
+  padding-left: 10px;
 }
 /*# sourceMappingURL=style.css.map */
