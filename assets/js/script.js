@@ -7,18 +7,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     moreButton = document.getElementById("moreButton"),
     genreButtons = document.querySelectorAll(".genreButton");
 
-  let latestMovies = latestMovieFetch(),
-    cardMovies = cardMoviesFetch(5, "movieCardTarget"),
-    chosenFiltre = "",
+  let chosenFiltre = "",
     page = 1,
     max = 20,
     shopArray = [],
     shopIndex = 0;
+  latestMovieFetch(),
+    cardMoviesFetch(5, "movieCardTarget"),
+    overlay.addEventListener("click", () => {
+      const modal = document.querySelector(".modalSelect.active");
+      closeModal(modal);
+    });
 
-  overlay.addEventListener("click", () => {
-    const modal = document.querySelector(".modalSelect.active");
-    closeModal(modal);
-  });
+  openModal(document.getElementById("cookieModal"));
 
   document.getElementById("sendButton").addEventListener("click", () => {
     const firstName = document.getElementById("firstName").value,
@@ -89,7 +90,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function openModal(modal) {
-    console.log(modal);
     modal.classList.add("active");
     overlay.classList.add("active");
   }
@@ -110,10 +110,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             <span class="mainTitleSpan">MO</span>VIES
           </h1>
           <p>${latest[i].original_title}.</p>
-          <button class="stage-button">WATCH TRAILER</button>
+          <button class="stage-button"">WATCH TRAILER</button>
         </div>
       </div>`;
-      //add trailer here
       carousel.appendChild(newMovie);
     }
     document.getElementById("carouselFilmProposition").appendChild(carousel);
@@ -131,7 +130,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       const newCard = document.createElement("div");
       newCard.classList.add("card", "filmSection");
       newCard.setAttribute("data-modal-target", "#modal");
-      //newCard.style.width = "12rem";
       newCard.innerHTML = `
     <img src="${img_url}${data[i].poster_path}" class="card-img-top" alt="poster">
     <div class="card-body d-flex flex-column justify-content-between">
@@ -167,7 +165,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     openModalButton.forEach((button) => {
       button.addEventListener("click", () => {
-        console.log("in");
         const modal = document.querySelector(button.dataset.modalTarget);
         openModal(modal);
       });
@@ -182,7 +179,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function displayShop(arr, index) {
-    console.log(index);
     let genreArr = [];
     genres.map((el) => {
       arr[index].genre_ids.map((ids) => {
@@ -248,43 +244,33 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  async function latestMovieFetch() {
-    const promiseLatest = new Promise((succes) => {
-      fetch(
-        "https://api.themoviedb.org/3/movie/now_playing?api_key=064a095d09fe3dff6f8350dae42af935&language=en-US&page=1"
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          latestMovies = data.results;
-          latestMovie(latestMovies);
-          latestMoviesList(latestMovies);
-          succes("over");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    });
-    await promiseLatest;
-    return latestMovies;
+  function latestMovieFetch() {
+    fetch(
+      "https://api.themoviedb.org/3/movie/now_playing?api_key=064a095d09fe3dff6f8350dae42af935&language=en-US&page=1"
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        latestMovies = data.results;
+        latestMovie(latestMovies);
+        latestMoviesList(latestMovies);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   cardMoviesFetch(8, "shop");
 
-  async function cardMoviesFetch(max, target) {
-    const promiseCard = new Promise((succes) => {
-      fetch(url)
-        .then((res) => res.json())
-        .then((data) => {
-          const movies = data.results;
-          movieCard(movies, max, target);
-          succes("over");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    });
-    await promiseCard;
-    return latestMovies;
+  function cardMoviesFetch(max, target) {
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        const movies = data.results;
+        movieCard(movies, max, target);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   featureMovie(1, max, chosenFiltre);

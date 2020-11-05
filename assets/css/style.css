@@ -11206,6 +11206,22 @@ html {
   width: 12.5rem;
 }
 
+.cookieModal {
+  border-radius: 20px;
+}
+
+.cookieModal a {
+  color: red;
+}
+
+.cookieModal button {
+  display: block;
+  margin-left: auto;
+  background-color: green;
+  color: white;
+  border: none;
+}
+
 @media screen and (max-width: 778px) {
   .filmSection {
     width: 70vw;
