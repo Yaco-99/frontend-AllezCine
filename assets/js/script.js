@@ -166,6 +166,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     openModalButton.forEach((button) => {
       button.addEventListener("click", () => {
         const modal = document.querySelector(button.dataset.modalTarget);
+        console.log(button);
         openModal(modal);
       });
     });
