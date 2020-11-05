@@ -76,7 +76,7 @@ html {
   color: rgb(226, 70, 23);
 }
 
-.trailerModal {
+.styleModal {
   top: 50%;
   left: 25%;
   position: fixed;
@@ -131,6 +131,13 @@ html {
 }
 
 @media screen and (max-width: 778px) {
+  .styleModal {
+    left: 50%;
+    overflow-y: scroll;
+    max-height: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
   .filmSection {
     width: 70vw;
     margin: auto;

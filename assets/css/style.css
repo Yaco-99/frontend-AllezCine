@@ -10969,25 +10969,6 @@ a {
   border: none;
 }
 
-.contactModal {
-  top: 50%;
-  left: 25%;
-  position: fixed;
-  -webkit-transform: translate(-50%, -50%) scale(0);
-          transform: translate(-50%, -50%) scale(0);
-  -webkit-transition: 200ms ease-in-out;
-  transition: 200ms ease-in-out;
-  z-index: 16;
-  background: white;
-  padding: 1em;
-  border-radius: 20px;
-}
-
-.contactModal.active {
-  -webkit-transform: translate(-50%, -50%) scale(1);
-          transform: translate(-50%, -50%) scale(1);
-}
-
 footer {
   background-color: black;
 }
@@ -11159,7 +11140,7 @@ html {
   color: #e24617;
 }
 
-.trailerModal {
+.styleModal {
   top: 50%;
   left: 25%;
   position: fixed;
@@ -11173,7 +11154,7 @@ html {
   border-radius: 20px;
 }
 
-.trailerModal.active {
+.styleModal.active {
   -webkit-transform: translate(-50%, -50%) scale(1);
           transform: translate(-50%, -50%) scale(1);
 }
@@ -11223,6 +11204,13 @@ html {
 }
 
 @media screen and (max-width: 778px) {
+  .styleModal {
+    left: 50%;
+    overflow-y: scroll;
+    max-height: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
   .filmSection {
     width: 70vw;
     margin: auto;
