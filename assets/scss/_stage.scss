@@ -2,6 +2,20 @@ svg {
   height: 20px;
   width: 20px;
 }
+.nav-input {
+  color: white;
+  &:focus {
+    background: none;
+    color: white;
+  }
+  &::placeholder {
+    color: white;
+  }
+}
+.search-svg {
+  fill: white;
+}
+
 .mainTitleSpan {
   color: red;
 }
@@ -47,6 +61,7 @@ a {
 }
 .stage-button {
   background-color: red;
+  border: none;
   width: 200px;
   display: block;
   margin: auto;

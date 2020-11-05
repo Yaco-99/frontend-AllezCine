@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     api_key = "064a095d09fe3dff6f8350dae42af935",
     img_url = "https://image.tmdb.org/t/p/w500",
     overlay = document.getElementById("overlay"),
-    closeModalButton = document.getElementById("close-modal-button"),
     moreButton = document.getElementById("moreButton"),
     genreButtons = document.querySelectorAll(".genreButton");
 
@@ -17,12 +16,25 @@ document.addEventListener("DOMContentLoaded", async () => {
     shopIndex = 0;
 
   overlay.addEventListener("click", () => {
-    const modal = document.querySelector(".trailerModal.active");
+    const modal = document.querySelector(".modalSelect.active");
     closeModal(modal);
   });
 
-  closeModalButton.addEventListener("click", () => {
-    closeModal(modal);
+  document.getElementById("sendButton").addEventListener("click", () => {
+    const firstName = document.getElementById("firstName").value,
+      lastName = document.getElementById("lastName").value,
+      email = document.getElementById("mail").value,
+      subject = document.getElementById("subject").value,
+      message = document.getElementById("message").value;
+    window.confirm(
+      `
+       first name : ${firstName} 
+       lastName : ${lastName} 
+       email : ${email} 
+       subject : ${subject} 
+       message : ${message}
+       Confirm ?`
+    );
   });
 
   genreButtons.forEach((button) => {
@@ -47,11 +59,39 @@ document.addEventListener("DOMContentLoaded", async () => {
     featureMovie(page, max, chosenFiltre);
   });
 
+  window.onscroll = function (ev) {
+    window.innerHeight + window.pageYOffset >= document.body.offsetHeight
+      ? displayUP()
+      : "no";
+  };
+
+  function displayUP() {
+    const btn = document.createElement("div");
+    btn.classList.add("UP-button");
+    btn.innerHTML = `<button type="button" class="inner-button id="goingUp">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+    </svg>
+  </button>`;
+    document.body.appendChild(btn);
+    btn.addEventListener("click", () => {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+      document.body.removeChild(btn);
+    });
+  }
+
   function closeModal(modal) {
     if (modal == null) return;
     document.getElementById("actor").innerHTML = ``;
     modal.classList.remove("active");
     overlay.classList.remove("active");
+  }
+
+  function openModal(modal) {
+    console.log(modal);
+    modal.classList.add("active");
+    overlay.classList.add("active");
   }
 
   function latestMovie(latest) {
@@ -80,6 +120,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function movieCard(data, max, target) {
+    const closeModalButton = document.querySelectorAll("[data-close-modal]"),
+      openModalButton = document.querySelectorAll("[data-modal-target]");
     let movieGenre;
     for (let i = 0; i < max; i++) {
       target == "shop" ? shopArray.push(data[i]) : "no";
@@ -88,7 +130,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       );
       const newCard = document.createElement("div");
       newCard.classList.add("card", "filmSection");
-      newCard.style.width = "12rem";
+      newCard.setAttribute("data-modal-target", "#modal");
+      //newCard.style.width = "12rem";
       newCard.innerHTML = `
     <img src="${img_url}${data[i].poster_path}" class="card-img-top" alt="poster">
     <div class="card-body d-flex flex-column justify-content-between">
@@ -120,6 +163,21 @@ document.addEventListener("DOMContentLoaded", async () => {
       displayShop(shopArray, shopIndex);
       e.stopPropagation();
       e.preventDefault();
+    });
+
+    openModalButton.forEach((button) => {
+      button.addEventListener("click", () => {
+        console.log("in");
+        const modal = document.querySelector(button.dataset.modalTarget);
+        openModal(modal);
+      });
+    });
+
+    closeModalButton.forEach((button) => {
+      button.addEventListener("click", () => {
+        const modal = button.closest(".modalSelect");
+        closeModal(modal);
+      });
     });
   }
 
@@ -158,8 +216,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function showTrailer(id, info) {
     const link = `youtube.com/embed/${id}`;
-    document.getElementById("modal").classList.add("active");
-    document.getElementById("overlay").classList.add("active");
     document.getElementById("trailerTitle").innerHTML = info.original_title;
     document.getElementById("trailerTarget").src = link;
     document.getElementById("overview").innerHTML = info.overview;
@@ -183,6 +239,15 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
   }
 
+  function latestMoviesList(list) {
+    for (let i = 0; i < 4; i++) {
+      const newElement = document.createElement("li");
+      newElement.classList.add("movieList");
+      newElement.innerHTML = `<img src="${img_url}${list[i].poster_path}" alt="movie"><p class="ml-2">${list[i].original_title}</p>`;
+      document.getElementById("listTarget").appendChild(newElement);
+    }
+  }
+
   async function latestMovieFetch() {
     const promiseLatest = new Promise((succes) => {
       fetch(
@@ -192,6 +257,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         .then((data) => {
           latestMovies = data.results;
           latestMovie(latestMovies);
+          latestMoviesList(latestMovies);
           succes("over");
         })
         .catch((error) => {

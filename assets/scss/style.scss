@@ -4,9 +4,15 @@
 @import "moviesCards";
 @import "featureMovies";
 @import "shop";
+@import "contact";
+@import "footer";
 
 body {
   font-size: 14px;
+  overflow-x: hidden;
+}
+html {
+  overflow-x: hidden;
 }
 .buttonRed {
   border: none;
@@ -66,10 +72,14 @@ body {
   }
 }
 
+.title {
+  color: rgb(226, 70, 23);
+}
+
 .trailerModal {
   top: 50%;
   left: 25%;
-  position: absolute;
+  position: fixed;
   transform: translate(-50%, -50%) scale(0);
   transition: 200ms ease-in-out;
   z-index: 16;
@@ -100,4 +110,19 @@ body {
 .secondary-title {
   border-left: solid 4px red;
   padding-left: 10px;
+}
+
+.filmSection {
+  width: 12.5rem;
+}
+@media screen and (max-width: 778px) {
+  .filmSection {
+    width: 70vw;
+    margin: auto;
+  }
+  .movieCardTarget,
+  .featuredMoviesTarget,
+  .shop {
+    align-items: center;
+  }
 }

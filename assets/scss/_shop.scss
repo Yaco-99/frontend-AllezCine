@@ -1,16 +1,11 @@
 .shop-card {
-  width: 100%;
-  height: 100%;
   background-color: rgb(27, 27, 27);
   img {
-    height: 55%;
+    height: 25rem;
   }
 }
 .shop-card-body {
   color: white;
-  .title {
-    color: rgb(226, 70, 23);
-  }
 }
 .arrow {
   background-color: black;
