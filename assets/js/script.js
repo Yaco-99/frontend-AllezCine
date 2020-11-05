@@ -215,7 +215,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function showTrailer(id, info) {
-    const link = `youtube.com/embed/${id}`;
+    const link = `https://youtube.com/embed/${id}`;
     document.getElementById("trailerTitle").innerHTML = info.original_title;
     document.getElementById("trailerTarget").src = link;
     document.getElementById("overview").innerHTML = info.overview;
