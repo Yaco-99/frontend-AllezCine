@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,MAAM,CAAC;EACL,OAAO,EAAE,IAAI;EACb,WAAW,EAAE,MAAM;EACnB,gBAAgB,EAAE,KAAK;CAIxB;;AAPD,AAIE,MAJI,CAIJ,CAAC,CAAC;EACA,SAAS,EAAE,IAAI;CAChB;;AAEH,AAAA,MAAM,CAAC;EACL,gBAAgB,EAAE,KAAK;CACxB;;AACD,AAAA,UAAU,CAAC;EACT,UAAU,EAAE,IAAI;CACjB",
+    "sources": [
+        "../scss/styleNews.scss"
+    ],
+    "names": [],
+    "file": "styleNews.css"
+}

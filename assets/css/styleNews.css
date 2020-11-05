@@ -1,0 +1,22 @@
+header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: black;
+}
+
+header p {
+  font-size: 32px;
+}
+
+.promo {
+  background-color: black;
+}
+
+.Newstitle {
+  margin-top: 10vh;
+}
+/*# sourceMappingURL=styleNews.css.map */

@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const url =
       "https://api.themoviedb.org/3/movie/top_rated?api_key=064a095d09fe3dff6f8350dae42af935&language=en-US",
-    api_key = "064a095d09fe3dff6f8350dae42af935",
     img_url = "https://image.tmdb.org/t/p/w500",
     overlay = document.getElementById("overlay"),
     moreButton = document.getElementById("moreButton"),
