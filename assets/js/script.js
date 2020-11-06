@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const url =
       "https://api.themoviedb.org/3/movie/top_rated?api_key=064a095d09fe3dff6f8350dae42af935&language=en-US",
-    img_url = "https://image.tmdb.org/t/p/w500",
+    img_url = "https://image.tmdb.org/t/p/",
     overlay = document.getElementById("overlay"),
     moreButton = document.getElementById("moreButton"),
     genreButtons = document.querySelectorAll(".genreButton");
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       newMovie.classList.add("carousel-item");
       i == 0 ? newMovie.classList.add("active") : "no";
       newMovie.innerHTML = `
-        <img src="${img_url}${latest[i].poster_path}" class="d-block w-100" alt="poster">
+        <img src="${img_url}original${latest[i].poster_path}" class="d-block w-100" alt="poster">
         <div class="carousel-caption d-none d-md-block">
           <div class="carousel-element">
           <h1>
@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       newCard.classList.add("card", "filmSection");
       newCard.setAttribute("data-modal-target", "#modal");
       newCard.innerHTML = `
-    <img src="${img_url}${data[i].poster_path}" class="card-img-top" alt="poster">
+    <img src="${img_url}w500${data[i].poster_path}" class="card-img-top" alt="poster">
     <div class="card-body d-flex flex-column justify-content-between">
       <h5 class="card-title text-center">${data[i].original_title}</h5>
       <div class="d-flex justify-content-between">
@@ -187,7 +187,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
     document.getElementById(
       "shopImg"
-    ).src = `${img_url}${arr[index].poster_path}`;
+    ).src = `${img_url}original${arr[index].poster_path}`;
     document.getElementById("ShopMovieTitle").innerHTML =
       arr[index].original_title;
     document.getElementById("shopStoryLine").innerHTML = arr[index].overview;
@@ -239,7 +239,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     for (let i = 0; i < 4; i++) {
       const newElement = document.createElement("li");
       newElement.classList.add("movieList");
-      newElement.innerHTML = `<img src="${img_url}${list[i].poster_path}" alt="movie"><p class="ml-2">${list[i].original_title}</p>`;
+      newElement.innerHTML = `<img src="${img_url}w500${list[i].poster_path}" alt="movie"><p class="ml-2">${list[i].original_title}</p>`;
       document.getElementById("listTarget").appendChild(newElement);
     }
   }
